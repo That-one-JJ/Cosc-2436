@@ -1,0 +1,124 @@
+#include <cctype>       // Provides toupper
+#include <iostream>     // Provides cout and cin
+#include <cstdlib>      // Provides EXIT_SUCCESS
+using namespace std;
+#include "List.h"  
+
+// PROTOTYPES:
+void print_menu( );
+// Postcondition: A menu of choices has been printed.
+
+int get_number( );
+// Postcondition: The user has been prompted to enter an integer number. The
+// number has been read, echoed to the screen, and returned by the function.
+
+
+
+
+int main( )
+{
+    List test;     // A List to perform tests on
+    List copy;
+    ElementType item;
+    int num_oflists = 0;
+    char choice;   // Command entered by the user
+    int pos;        //specifies a position in the list
+    int index;   
+    cout << "I have initialized an empty list of integers." << endl;
+
+    do
+    {
+        print_menu( );
+        cout << "Enter choice: ";
+        cin >> choice; 
+        choice = toupper(choice);
+        
+        switch (choice)
+        {
+            case 'C': // make a copy of a list
+                {
+                cout << endl << " Producing a copy of test list: " ;
+                List temp(test);
+                cout << endl << " Here is a copy of the list: ";
+                cout << endl << temp << endl;
+                copy = temp;
+                num_oflists += 1;
+                }
+                break;            
+            case 'D': // Deletes a list
+
+                cout << endl << "Deleting list...";
+                test.~List();
+                cout << endl << "List deleted";
+                break;
+            case 'E': // add code to print result of empty( )
+                if (test.empty() == 0)
+                    cout << endl << "The list is not empty.";
+                else if(test.empty() == 1)
+                    cout << endl << "The list is empty.";
+                    break;
+            case 'P': // add code to print the list
+
+                cout << test << endl;
+                if (num_oflists == 1){
+                    cout << endl << copy << endl;
+                }
+                
+                break;
+            case 'G':
+                cout << endl << "size: " << test.getSize();
+                break;
+
+
+            case 'I': // add code to input an item and position, and insert item into the list
+
+                cout << endl << "Please enter an item: ";
+                cin >> item;
+                cout << endl << "Please enter a position in the list: ";
+                cin >> pos;
+                test.insert( item, pos );
+                break;
+            case 'R': // add code to input a position, and erase the item at that position
+                cout << endl << "Enter a list position you would like"
+                     << "to erase: ";
+                cin >> index;
+                test.erase(index);
+                break;
+
+     
+            case 'Q': cout << "Test program ended." << endl;
+                      break;
+            default:  cout << choice << " is invalid." << endl;
+        }
+    }
+    while ((choice != 'Q'));
+
+    return 0;
+}
+
+void print_menu( )
+{
+    cout << endl; 
+    cout << "The following choices are available: " << endl;
+    cout << " C   Copy a list " << endl;
+    cout << " D   Delete a list" << endl;
+    cout << " E   Print the result from the empty( ) function" << endl;
+    cout << " G   return size of list" << endl;
+    cout << " P   Print a copy of the entire list" << endl;
+    cout << " I   Insert a new number with the insert(...) function" << endl;
+    cout << " R   Remove a number with the erase( ) function" << endl;
+    cout << " Q   Quit this test program" << endl;
+}
+
+
+int get_number( )
+// Library facilities used: iostream
+{
+    int result;
+    
+    cout << "Please enter an integer number for the list: ";
+    cin  >> result;
+    cout << result << " has been read." << endl;
+    return result;
+}
+

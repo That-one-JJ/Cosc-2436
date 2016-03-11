@@ -1,0 +1,128 @@
+#include "Quadfuncs.h"
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+Quadratic::Quadratic(){
+    double a = 0;
+    double b = 0;
+    double c = 0;
+    double value = 0;
+}
+
+void Quadratic::set ( double newA, double newB, double newC){
+    this->a = newA;
+    this->b = newB;
+    this->c = newC;
+}
+
+
+
+double Quadratic::getA() const{
+    return this->a;
+}
+
+double Quadratic::getB() const{
+    return this->b;
+}
+
+double Quadratic::getC() const{
+    return this->c;
+}
+
+void Quadratic::display() const {
+    //cout << a << "x + " << b << "x + " << c;
+    cout << "The current quadratic equation is: " << this->a << "x^2 + "
+        << this->b << "x + " << this->c;
+}
+
+double Quadratic::evaluate( double x ) const{
+    double a = this->a * x * x;
+    double b = this->b * x;
+    double value = a + b + c;
+    return value;
+}
+
+int Quadratic::getNumRoots(double a, double b, double c) const{
+    if (( a && b && c) == 0){
+        cout << endl << "All three values of X are real roots.";
+        return 3;
+    }
+    else if (((a && b) == 0) && (c != 0 )) {
+        cout << endl << "There are no real roots present.";
+        return 0;
+    }
+    else if ((a == 0) && (b != 0 )) {
+        cout << endl << "There is only one real root. ";
+        return 1;
+    }
+    else if ((a != 0) && ((b*b) < (4 * a * c))) {
+        cout << endl << "There are no real roots present. ";
+        return 0;
+    }
+    else if ((a != 0) && ((b*b) == (4 * a * c))) {
+        cout << endl << "There is only one real root. ";
+        return 1;
+    }
+    else if (( a !=0 )   && ((b * b) < (4 * a * c))) {
+        cout << endl << "There are two real roots. ";
+        return 2;
+    }
+}
+
+double Quadratic::getSmallRoot(int rootnum, double a, double b, double c) const{
+    double x1;
+    double x2;
+    if ((rootnum == 1) && (a == 0) && (b !=0 )) {
+        x1 = (-c/b);
+        return x1;
+        }
+    if ((rootnum == 1) && (a != 0 ) && ((b * b) < (4 * a * c))){
+        x1 = (-b/(2 * a ));
+        return x1;
+    }
+    if ((rootnum == 2) && ((b * b) > (4 * a * c ))) {
+        x1 = ((-b - sqrt((b * b) - (4 * a * c))) / (2  * a));
+        x2 = ((-b + sqrt((b * b) - (4 * a * c))) / (2  * a));
+    }
+        if (x1 < x2)
+            return x1;
+        else if (x2 < x1)
+            return x2;
+    }
+double Quadratic::getLargeRoot(int rootnum, double a, double b, double c) const{
+    double x1;
+    double x2;
+    if ((rootnum == 1) && (a == 0) && (b !=0 )) {
+        x1 = (-c/b);
+        return x1;
+        }
+    if ((rootnum == 1) && (a != 0 ) && ((b * b) < (4 * a * c))){
+        x1 = (-b/(2 * a ));
+        return x1;
+    }
+    if ((rootnum == 2) && ((b * b) > (4 * a * c ))) {
+        x1 = ((-b - sqrt((b * b) - (4 * a * c))) / (2  * a));
+        x2 = ((-b + sqrt((b * b) - (4 * a * c))) / (2  * a));
+        if (x1 > x2)
+            return x1;
+        else if (x2 > x1)
+            return x2;
+        }
+    }
+    Quadratic operator+( const Quadratic& q1, const Quadratic& q2 ){
+        Quadratic temp;
+        temp.a = q1.getA() + q2.getA();
+        temp.b = q1.getB() + q2.getB();
+        temp.c = q1.getC() + q2.getC();
+        return temp;
+
+    }
+    Quadratic operator*( double r, const Quadratic& q ){
+        
+        Quadratic temp;
+        temp.a = r * q.getA();
+        temp.b = r * q.getB();
+        temp.c = r * q.getC();
+        return temp;
+    }

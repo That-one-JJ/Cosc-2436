@@ -1,0 +1,121 @@
+//Jared Jones
+//Project Number: 3
+//Project Desc: List class with Resizable Dynamic Array
+//Course Number: Data Structures
+
+
+
+#include <cctype>       // Provides toupper
+#include <iostream>     // Provides cout and cin
+#include <cstdlib>      // Provides EXIT_SUCCESS
+using namespace std;
+#include "DList.h"  
+
+// PROTOTYPES:
+void print_menu( );
+// Postcondition: A menu of choices has been printed.
+
+int get_number( );
+// Postcondition: The user has been prompted to enter an integer number. The
+// number has been read, echoed to the screen, and returned by the function.
+
+
+
+
+int main( )
+{
+    List test;     // A List to perform tests on
+    int item;
+    int num_ofints;
+    char choice;   // Command entered by the user
+    int newCapacity; //The new list capacity that the user would like to set
+    int pos;        //specifies a position in the list
+    int index;   
+    cout << "I have initialized an empty list of integers." << endl;
+
+    do
+    {
+        print_menu( );
+        cout << "Enter choice: ";
+        cin >> choice; 
+        choice = toupper(choice);
+        
+        switch (choice)
+        {
+            case 'A': // add code to add n integers to end of list
+                
+                cout << endl<< "How many random integers do you want to add?";
+                cin >> num_ofints;
+                test.addrandint(num_ofints);
+                break;
+            case 'C': // add code to change the capacity of the list
+
+                cout << endl << "What would you like to set the capacity to?";
+                cin >> newCapacity;
+                test.setCapacity(newCapacity );
+                break;
+            case 'E': // add code to print result of empty( )
+                if (test.empty() == 0)
+                    cout << endl << "The list is not empty.";
+                else if(test.empty() == 1)
+                    cout << endl << "The list is empty.";
+                    break;
+            case 'P': // add code to print the list
+                cout << test << endl;
+                break;
+            case 'G':
+                cout << endl << "size: " << test.getSize();
+                cout << endl << "capacity: " << test.getCapacity();
+                break;
+
+
+            case 'I': // add code to input an item and position, and insert item into the list
+
+                cout << endl << "Please enter an item: ";
+                cin >> item;
+                cout << endl << "Please enter a position in the list: ";
+                cin >> pos;
+                test.insert( item, pos );
+                break;
+            case 'R': // add code to input a position, and erase the item at that position
+                cout << endl << "Enter a list position you would like"
+                     << "to erase: ";
+                cin >> index;
+                test.erase(index);
+                break;
+
+     
+            case 'Q': cout << "Test program ended." << endl;
+                      break;
+            default:  cout << choice << " is invalid." << endl;
+        }
+    }
+    while ((choice != 'Q'));
+    return EXIT_SUCCESS;
+}
+
+void print_menu( )
+{
+    cout << endl; 
+    cout << "The following choices are available: " << endl;
+    cout << " A   Add a number of random integers to end of list" << endl;
+    cout << " C   Change the capacity of the list using the setCapacity function" << endl;
+    cout << " E   Print the result from the empty( ) function" << endl;
+    cout << " P   Print a copy of the entire list" << endl;
+    cout << " I   Insert a new number with the insert(...) function" << endl;
+    cout << " R   Remove a number with the erase( ) function" << endl;
+    cout << " Q   Quit this test program" << endl;
+}
+
+
+int get_number( )
+// Library facilities used: iostream
+{
+    int result;
+    
+    cout << "Please enter an integer number for the list: ";
+    cin  >> result;
+    cout << result << " has been read." << endl;
+    return result;
+}
+
