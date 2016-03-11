@@ -1,0 +1,14 @@
+
+#pragma once
+#include <string>
+using namespace std;
+
+
+class PrintFunctions {
+    public:
+        void printChar( char ch );
+        void printShort( short sh);
+        void printFloat( float fl );
+
+        PrintFunctions();     //default constructor
+};

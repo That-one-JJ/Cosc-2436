@@ -1,0 +1,85 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include "PrintFunctions.h"
+using namespace std;
+
+PrintFunctions::PrintFunctions(){
+        this->ch = 'a';
+        this->sh = 0;
+        this->fl = 0.0;
+}
+
+void PrintFunctions::printChar( char ch ){
+	this->ch = ch;
+    int n = 7;
+    int bitcount = 0;
+    unsigned char mask = pow(2,n);
+    for (int i = 0; i < 8; i++){
+      
+        if ((ch & mask) != 0)
+            cout << '1';
+        else
+            cout <<'0';
+        mask = mask>>1;
+		bitcount += 1;
+        if (bitcount == 4){
+            cout << "    ";
+            bitcount = 0;
+        }
+    
+	}
+}
+
+void PrintFunctions::printShort( short sh){
+	this->sh = sh;
+    int n = 15;
+    int bitcount = 0;
+    unsigned short mask = pow(2,n);
+    for (int i = 0; i < 16; i++){
+      
+        if ((sh & mask) != 0)
+            cout << '1';
+        else
+            cout <<'0';
+        mask = mask>>1;
+		bitcount += 1;
+        if (bitcount == 4){
+            cout << "    ";
+            bitcount = 0;
+        }
+    
+	}
+}	
+
+void PrintFunctions::printFloat( float fl ){
+
+    this->fl = fl;
+
+	union FloatValue
+	{
+		int intView;
+		float Value;
+	};	
+   
+	FloatValue num;
+	int n = 31;
+    int bitcount = 0;
+	mask = pow(2,n);
+    num.Value = this->fl;
+
+	for (int i = 0; i < 32; i++){
+      
+        if ((num.intView & mask) != 0)
+            cout << '1';
+        else
+            cout <<'0';
+        bitcount += 1;
+        if (bitcount == 4){
+            cout << "    ";
+            bitcount = 0;
+        mask = mask>>1;
+		}
+    
+	}
+}

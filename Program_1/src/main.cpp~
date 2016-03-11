@@ -1,0 +1,76 @@
+//Programmer: Bob Comer
+//Project Number: 1
+//Project Desc: Binary Representaionss of Data
+//Course: Data Structures
+//Date: Jan. 25 2016
+
+
+#include <iostream>
+#include <string>
+#include <limits>
+#include "PrintFunctions.h"
+
+using namespace std;
+
+PrintFunctions instance;
+
+int main(int argc, char *argv[]){
+    //char ch = 'D';
+    //short sh = 29000;
+	//float fl = 3.7;
+  
+	//Printed Menu
+	cout << "Menu" << endl;
+    cout << "	1  -  Print the binary representation of a character" << endl;
+    cout << "	2  -  Print the binary representation of a short integer" << endl;
+    cout << "	3  -  Print the binary representation of a float" << endl;
+    cout << "	4  - Exit Program" << endl;
+	
+	//choice prompt
+	int choice = 0;
+	while (choice != 4){
+	
+		cout << endl << endl << "Enter your choice: ";
+		cin >> choice;
+		if (choice == 1) {
+			char ch;
+			cout << "Enter a character: ";
+			cin >> ch;
+			cout << "The binary representation for " << ch << " is:  "; 
+    		instance.printChar(ch);		
+		}
+		else if(choice == 2) {
+			short sh;
+			int tempshort;
+			cout << "Enter a short integer: ";
+			cin >> tempshort;
+			while (tempshort < -32,768 || tempshort > 32,767){
+				cout << endl << "please enter a valid above -32768 or below 32767!";
+				cout << endl << "enter a valid number: ";
+				cin >> tempshort;
+			}
+			sh = tempshort;
+			cout << endl << "The binary representation for " << sh << " is: ";
+    		instance.printShort(sh);	
+		}
+		else if(choice == 3){
+			float fl;
+			cout << "Enter a float number: ";
+			cin >> fl;
+			cout << endl << "The binary representation for " << fl << " is: ";
+			instance.printFloat(fl);	
+		}	
+		else if(choice == 4){
+			break;
+		}
+        else if( ! ( cin >> choice ) ) {
+            cout << endl << "invalid input!\n";
+            cin.clear();
+            cin.ignore( numeric_limits<int>::max(), '\n' );
+            cout << endl << "Please enter a valid choice: ";
+            }
+    
+
+	}
+    return(0);
+}    
